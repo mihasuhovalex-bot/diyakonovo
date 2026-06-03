@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Дьяконово — Экосистема посёлка</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0d0f0e;--ink2:#141815;--ink3:#1c211e;--ink4:#252c28;
+  --gold:#c9a96e;--gold2:#e8c98a;--gold3:#f5e4c0;
+  --mist:#8a9690;--mist2:#6a7670;--cream:#f0ebe0;--sage:#3d5a48;
+  --border:#2a332e
+}
+html{scroll-behavior:smooth}
+body{background:var(--ink);font-family:'Jost',sans-serif;color:var(--cream);min-height:100vh;overflow-x:hidden}
+
+/* ─── HERO ─── */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;text-align:center;
+  padding:80px 24px;position:relative;overflow:hidden
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% 40%, #1a2e22 0%, var(--ink) 70%);
+  pointer-events:none
+}
+.hero-eyebrow{
+  font-size:10px;letter-spacing:0.24em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:20px;position:relative
+}
+.hero-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(52px,8vw,96px);font-weight:300;
+  color:var(--cream);line-height:1.05;letter-spacing:0.01em;
+  margin-bottom:24px;position:relative
+}
+.hero-title em{font-style:italic;color:var(--gold2)}
+.hero-sub{
+  font-size:14px;color:var(--mist);letter-spacing:0.06em;
+  max-width:420px;line-height:1.8;position:relative;margin-bottom:48px
+}
+.hero-scroll{
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  position:relative;cursor:pointer;text-decoration:none
+}
+.hero-scroll span{font-size:10px;letter-spacing:0.16em;color:var(--mist2);text-transform:uppercase}
+.scroll-line{width:0.5px;height:48px;background:linear-gradient(to bottom,var(--gold),transparent)}
+
+/* ─── SECTION ─── */
+.section{padding:80px 24px;max-width:900px;margin:0 auto}
+.section-eyebrow{
+  font-size:10px;letter-spacing:0.2em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:12px
+}
+.section-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(36px,5vw,56px);font-weight:300;
+  color:var(--cream);line-height:1.1;margin-bottom:16px;letter-spacing:0.01em
+}
+.section-title em{font-style:italic;color:var(--gold2)}
+.section-body{font-size:14px;color:var(--mist);line-height:1.85;letter-spacing:0.02em;max-width:560px}
+.accent-line{width:40px;height:0.5px;background:var(--gold);margin-bottom:20px}
+.divider{height:0.5px;background:var(--border);margin:0 24px}
+
+/* ─── FEATURES GRID ─── */
+.feat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:12px;margin-top:32px
+}
+.feat-card{
+  background:var(--ink3);border:0.5px solid var(--border);
+  border-radius:16px;padding:24px;transition:border-color 0.2s
+}
+.feat-card:hover{border-color:var(--sage)}
+.feat-icon{font-size:22px;color:var(--gold);margin-bottom:14px}
+.feat-name{font-size:14px;font-weight:500;color:var(--cream);margin-bottom:6px;letter-spacing:0.03em}
+.feat-desc{font-size:12px;color:var(--mist2);line-height:1.65;letter-spacing:0.02em}
+
+/* ─── STEPS ─── */
+.steps{margin-top:32px;display:flex;flex-direction:column}
+.step-row{
+  display:flex;align-items:flex-start;gap:20px;
+  padding:20px 0;border-bottom:0.5px solid var(--border)
+}
+.step-row:last-child{border-bottom:none}
+.step-num{
+  width:36px;height:36px;border-radius:50%;flex-shrink:0;
+  border:0.5px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:14px;color:var(--gold);margin-top:2px
+}
+.step-name{font-size:15px;color:var(--cream);letter-spacing:0.03em;margin-bottom:4px;font-weight:400}
+.step-detail{font-size:12px;color:var(--mist2);letter-spacing:0.02em;line-height:1.6}
+.step-tag{
+  display:inline-block;margin-left:10px;font-size:9px;
+  padding:2px 10px;border-radius:20px;
+  background:#1a2e22;color:var(--gold);border:0.5px solid #2a4a30;
+  letter-spacing:0.08em;text-transform:uppercase;vertical-align:middle
+}
+
+/* ─── PRICING ─── */
+.price-card{
+  background:var(--ink3);border:0.5px solid var(--border);
+  border-radius:20px;padding:32px;margin-top:32px;max-width:560px
+}
+.price-row{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:0.5px solid var(--border)}
+.price-row:last-child{border-bottom:none}
+.price-label{font-size:13px;color:var(--mist);letter-spacing:0.03em}
+.price-val{font-size:14px;color:var(--cream)}
+.price-val.big{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--gold2)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.tag{font-size:10px;letter-spacing:0.08em;padding:5px 14px;border-radius:20px;border:0.5px solid var(--border);color:var(--mist);text-transform:uppercase}
+.tag.hi{border-color:var(--sage);color:var(--gold)}
+
+/* ─── PHONE DEMO ─── */
+.demo-section{padding:80px 24px;text-align:center}
+.demo-wrap{display:flex;justify-content:center;margin-top:48px}
+.phone{
+  width:320px;background:var(--ink);border-radius:44px;
+  border:1px solid #2a332e;overflow:hidden;
+  box-shadow:0 0 80px rgba(0,0,0,0.6),0 0 0 0.5px #3a3a3a;
+  min-height:680px;position:relative
+}
+.phone-screen{display:none;flex-direction:column;min-height:680px;animation:fadeIn 0.22s ease}
+.phone-screen.active{display:flex}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+
+.p-statusbar{display:flex;justify-content:space-between;align-items:center;padding:14px 22px 0;font-size:10px;color:var(--mist2)}
+.p-header{padding:20px 22px 18px;border-bottom:0.5px solid #1e2722}
+.p-eyebrow{font-size:9px;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.p-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:var(--cream);line-height:1.15}
+.p-title em{font-style:italic;color:var(--gold2)}
+.p-sub{font-size:11px;color:var(--mist);margin-top:4px;letter-spacing:0.04em}
+.p-content{flex:1;padding:18px 18px 0}
+.p-eyebrow2{font-size:9px;letter-spacing:0.2em;color:var(--mist2);text-transform:uppercase;margin-bottom:10px}
+
+.svc-list{display:flex;flex-direction:column;gap:0;margin-bottom:18px}
+.svc-row{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 0;border-bottom:0.5px solid #1e2722;
+  cursor:pointer;transition:opacity 0.15s
+}
+.svc-row:hover{opacity:0.75}
+.svc-row.locked{opacity:0.3;cursor:default;pointer-events:none}
+.svc-icon-box{
+  width:36px;height:36px;border-radius:9px;background:var(--ink3);
+  border:0.5px solid var(--border);display:flex;align-items:center;
+  justify-content:center;flex-shrink:0
+}
+.svc-icon-box i{font-size:17px;color:var(--gold)}
+.svc-txt{flex:1}
+.svc-nm{font-size:13px;color:var(--cream);letter-spacing:0.02em}
+.svc-ds{font-size:10px;color:var(--mist2);margin-top:1px;letter-spacing:0.02em}
+.svc-arr{color:var(--mist2);font-size:13px}
+.svc-badge-sm{font-size:8px;letter-spacing:0.1em;padding:3px 8px;border-radius:20px;color:var(--gold);background:#1c1a12;border:0.5px solid #3a3018;text-transform:uppercase}
+
+.bk-card{background:var(--ink3);border:0.5px solid var(--border);border-radius:14px;padding:14px}
+.bk-lbl{font-size:8px;letter-spacing:0.18em;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
+.bk-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid #222a26}
+.bk-row:last-child{border-bottom:none}
+.bk-k{font-size:11px;color:var(--mist)}
+.bk-v{font-size:11px;color:var(--cream)}
+.bk-ok{font-size:9px;padding:2px 9px;border-radius:20px;background:#0d1f14;color:#6abf85;border:0.5px solid #1a4028;letter-spacing:0.06em}
+
+.p-back{display:flex;align-items:center;gap:6px;padding:14px 18px 0;color:var(--mist2);font-size:11px;cursor:pointer;background:none;border:none;letter-spacing:0.04em;font-family:'Jost',sans-serif}
+.p-back i{font-size:13px}
+
+.date-strip{display:flex;gap:7px;margin-bottom:18px;overflow-x:auto;padding-bottom:2px}
+.date-strip::-webkit-scrollbar{display:none}
+.d-chip{flex-shrink:0;width:46px;height:60px;background:var(--ink3);border:0.5px solid var(--border);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;transition:all 0.15s}
+.d-chip.sel{background:var(--sage);border-color:var(--sage)}
+.d-chip .dn{font-size:9px;color:var(--mist2);letter-spacing:0.06em;text-transform:uppercase}
+.d-chip .dd{font-size:17px;color:var(--cream);font-weight:300;font-family:'Cormorant Garamond',serif}
+.d-chip.sel .dn,.d-chip.sel .dd{color:var(--cream)}
+
+.time-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:16px}
+.t-chip{background:var(--ink3);border:0.5px solid var(--border);border-radius:11px;padding:12px 10px;cursor:pointer;transition:all 0.15s}
+.t-chip:hover:not(.occ){border-color:var(--sage)}
+.t-chip.sel{background:var(--sage);border-color:var(--sage)}
+.t-chip.occ{opacity:0.3;cursor:default}
+.t-time{font-size:15px;font-weight:300;color:var(--cream);font-family:'Cormorant Garamond',serif}
+.t-dur{font-size:9px;color:var(--mist2);letter-spacing:0.04em;margin-top:3px}
+.t-av{font-size:9px;color:var(--gold);letter-spacing:0.04em;margin-top:2px}
+.t-chip.sel .t-dur,.t-chip.sel .t-av{color:rgba(240,235,224,0.6)}
+.t-av.occ{color:var(--mist2)}
+
+.f-field{margin-bottom:12px}
+.f-lbl{font-size:9px;letter-spacing:0.14em;color:var(--gold);text-transform:uppercase;margin-bottom:5px;display:block}
+.f-inp{width:100%;background:var(--ink3);border:0.5px solid var(--border);border-radius:9px;padding:11px 13px;font-size:12px;color:var(--cream);font-family:'Jost',sans-serif;letter-spacing:0.03em;outline:none;transition:border-color 0.15s}
+.f-inp:focus{border-color:var(--sage)}
+.f-inp.locked{color:var(--mist2)}
+
+.cs-card{background:var(--ink3);border:0.5px solid var(--border);border-radius:13px;padding:13px 14px;margin-bottom:14px}
+.cs-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:0.5px solid #222a26}
+.cs-row:last-child{border-bottom:none}
+.cs-k{font-size:10px;color:var(--mist)}
+.cs-v{font-size:10px;color:var(--cream)}
+
+.btn-g{width:100%;background:var(--gold);color:#0d0f0e;border:none;border-radius:11px;padding:14px;font-size:12px;font-weight:500;cursor:pointer;font-family:'Jost',sans-serif;letter-spacing:0.08em;text-transform:uppercase;transition:background 0.15s;margin-bottom:7px}
+.btn-g:hover{background:var(--gold2)}
+.btn-gh{width:100%;background:transparent;color:var(--mist);border:0.5px solid var(--border);border-radius:11px;padding:12px;font-size:11px;cursor:pointer;font-family:'Jost',sans-serif;letter-spacing:0.06em;text-transform:uppercase;transition:all 0.15s}
+.btn-gh:hover{border-color:var(--mist2);color:var(--cream)}
+
+.success-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 22px;text-align:center}
+.s-ring{width:68px;height:68px;border-radius:50%;border:0.5px solid var(--gold);display:flex;align-items:center;justify-content:center;margin-bottom:22px}
+.s-ring i{font-size:24px;color:var(--gold)}
+.s-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--cream);margin-bottom:8px;letter-spacing:0.02em}
+.s-sub{font-size:11px;color:var(--mist);line-height:1.75;margin-bottom:24px;letter-spacing:0.03em}
+
+.p-bottom{display:flex;padding:10px 0 18px;border-top:0.5px solid #1e2722}
+.p-bb{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;opacity:0.35}
+.p-bb.on{opacity:1}
+.p-bb i{font-size:17px;color:var(--cream)}
+.p-bb.on i{color:var(--gold)}
+.p-bb span{font-size:8px;letter-spacing:0.1em;color:var(--mist2);text-transform:uppercase}
+.p-bb.on span{color:var(--gold)}
+
+/* ─── FOOTER ─── */
+.footer{padding:60px 24px;text-align:center;border-top:0.5px solid var(--border)}
+.footer-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,44px);font-weight:300;color:var(--cream);margin-bottom:12px}
+.footer-title em{font-style:italic;color:var(--gold2)}
+.footer-sub{font-size:13px;color:var(--mist);letter-spacing:0.04em}
+
+/* ─── MISC ─── */
+.cont-hidden{display:none}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">Предложение по разработке</p>
+  <h1 class="hero-title">Экосистема<br><em>Дьяконово</em></h1>
+  <p class="hero-sub">Мобильное веб-приложение для жителей посёлка — бронирование, сервисы, уведомления</p>
+  <a href="#overview" class="hero-scroll">
+    <span>Смотреть</span>
+    <div class="scroll-line"></div>
+  </a>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHAT IS IT -->
+<section class="section" id="overview">
+  <div class="accent-line"></div>
+  <p class="section-eyebrow">Концепция</p>
+  <h2 class="section-title">Единая точка<br><em>доступа</em></h2>
+  <p class="section-body">Житель открывает приложение, видит доступные сервисы посёлка и бронирует в несколько касаний. Без звонков, без мессенджеров, без ожидания.</p>
+  <div class="feat-grid">
+    <div class="feat-card">
+      <div class="feat-icon"><i class="ti ti-ripple" aria-hidden="true"></i></div>
+      <div class="feat-name">СПА</div>
+      <div class="feat-desc">Выбор слота, бронирование, онлайн-оплата, автоматическое подтверждение</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon"><i class="ti ti-horse" aria-hidden="true"></i></div>
+      <div class="feat-name">Конюшня</div>
+      <div class="feat-desc">Прогулки и уроки верховой езды с раздельными слотами и ценами</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon"><i class="ti ti-armchair" aria-hidden="true"></i></div>
+      <div class="feat-name">Коворкинг</div>
+      <div class="feat-desc">Бронирование мест, отображение доступности в реальном времени</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon"><i class="ti ti-tools-kitchen-2" aria-hidden="true"></i></div>
+      <div class="feat-name">Ресторан</div>
+      <div class="feat-desc">Бронь столика и заказ к дому с подтверждением по СМС</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section class="section">
+  <div class="accent-line"></div>
+  <p class="section-eyebrow">Как работает</p>
+  <h2 class="section-title">Три<br><em>шага</em></h2>
+  <p class="section-body">Путь пользователя занимает меньше минуты.</p>
+  <div class="steps">
+    <div class="step-row">
+      <div class="step-num">I</div>
+      <div>
+        <div class="step-name">Открыть приложение</div>
+        <div class="step-detail">Вход по номеру участка и СМС-коду. Без паролей, без лишних шагов.</div>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">II</div>
+      <div>
+        <div class="step-name">Выбрать сервис и время</div>
+        <div class="step-detail">Доступные слоты показаны в реальном времени. Выбор даты и времени одним касанием.</div>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">III</div>
+      <div>
+        <div class="step-name">Получить подтверждение</div>
+        <div class="step-detail">Бронь фиксируется мгновенно. Приходит СМС с деталями.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PLAN -->
+<section class="section">
+  <div class="accent-line"></div>
+  <p class="section-eyebrow">План разработки</p>
+  <h2 class="section-title">Четыре<br><em>этапа</em></h2>
+  <p class="section-body">Первый этап — рабочий продукт через 6–8 недель. Остальные сервисы подключаются постепенно.</p>
+  <div class="steps">
+    <div class="step-row">
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-name">Фундамент <span class="step-tag">1–2 нед</span></div>
+        <div class="step-detail">База данных, хостинг, авторизация по участку и СМС, базовая структура</div>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">2</div>
+      <div>
+        <div class="step-name">СПА-модуль <span class="step-tag">2 нед</span></div>
+        <div class="step-detail">Слоты, бронирование, онлайн-оплата ЮКасса, СМС-уведомления</div>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">3</div>
+      <div>
+        <div class="step-name">Остальные сервисы <span class="step-tag">2 нед</span></div>
+        <div class="step-detail">Конюшня, коворкинг, ресторан по той же архитектуре</div>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">4</div>
+      <div>
+        <div class="step-name">Запуск <span class="step-tag">1 нед</span></div>
+        <div class="step-detail">Финальное тестирование, деплой на продакшн, передача доступов</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRICING -->
+<section class="section">
+  <div class="accent-line"></div>
+  <p class="section-eyebrow">Стоимость</p>
+  <h2 class="section-title">Первый<br><em>этап</em></h2>
+  <p class="section-body">MVP с модулем СПА, авторизацией и админ-панелью. Остальные модули — второй этап по отдельному договору.</p>
+  <div class="price-card">
+    <div class="price-row" style="padding-top:0">
+      <span class="price-label">Стоимость первого этапа</span>
+      <span class="price-val big">100 000 ₽</span>
+    </div>
+    <div class="price-row">
+      <span class="price-label">Срок</span>
+      <span class="price-val">6–8 недель</span>
+    </div>
+    <div class="price-row">
+      <span class="price-label">Оплата</span>
+      <span class="price-val">50% старт · 50% сдача</span>
+    </div>
+    <div class="price-row">
+      <span class="price-label">Поддержка после сдачи</span>
+      <span class="price-val">1 месяц включён</span>
+    </div>
+    <div class="price-row">
+      <span class="price-label">Что входит</span>
+      <span class="price-val">СПА, авторизация, админка, деплой</span>
+    </div>
+    <div class="tags">
+      <span class="tag hi">Второй этап — отдельно</span>
+      <span class="tag">Конюшня</span>
+      <span class="tag">Коворкинг</span>
+      <span class="tag">Ресторан</span>
+      <span class="tag">Оплата ЮКасса</span>
+      <span class="tag">Чат посёлка</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- DEMO -->
+<section class="demo-section">
+  <div class="accent-line" style="margin:0 auto 20px"></div>
+  <p class="section-eyebrow" style="text-align:center">Интерактивное демо</p>
+  <h2 class="section-title" style="text-align:center">Как это<br><em>выглядит</em></h2>
+  <p class="section-body" style="text-align:center;margin:0 auto 0">Полный флоу бронирования СПА — нажимайте, выбирайте, смотрите результат.</p>
+
+  <div class="demo-wrap">
+    <div class="phone">
+
+      <!-- Главная -->
+      <div id="ps-home" class="phone-screen active">
+        <div class="p-statusbar"><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
+        <div class="p-header">
+          <div class="p-eyebrow">КП Дьяконово</div>
+          <div class="p-title">Добрый<br><em>вечер,</em> Александр</div>
+          <div class="p-sub">Участок 142 &nbsp;·&nbsp; Курская область</div>
+        </div>
+        <div class="p-content">
+          <p class="p-eyebrow2">Сервисы</p>
+          <div class="svc-list">
+            <div class="svc-row" onclick="ps('ps-spa')">
+              <div class="svc-icon-box"><i class="ti ti-ripple" aria-hidden="true"></i></div>
+              <div class="svc-txt"><div class="svc-nm">СПА</div><div class="svc-ds">Термальный комплекс</div></div>
+              <i class="ti ti-chevron-right svc-arr" aria-hidden="true"></i>
+            </div>
+            <div class="svc-row locked">
+              <div class="svc-icon-box"><i class="ti ti-horse" aria-hidden="true"></i></div>
+              <div class="svc-txt"><div class="svc-nm">Конюшня</div><div class="svc-ds">Прогулки и уроки</div></div>
+              <span class="svc-badge-sm">Скоро</span>
+            </div>
+            <div class="svc-row locked">
+              <div class="svc-icon-box"><i class="ti ti-armchair" aria-hidden="true"></i></div>
+              <div class="svc-txt"><div class="svc-nm">Коворкинг</div><div class="svc-ds">Деловая зона</div></div>
+              <span class="svc-badge-sm">Скоро</span>
+            </div>
+            <div class="svc-row locked">
+              <div class="svc-icon-box"><i class="ti ti-tools-kitchen-2" aria-hidden="true"></i></div>
+              <div class="svc-txt"><div class="svc-nm">Ресторан</div><div class="svc-ds">Бронь и доставка</div></div>
+              <span class="svc-badge-sm">Скоро</span>
+            </div>
+          </div>
+          <p class="p-eyebrow2" style="margin-top:4px">Ближайшая бронь</p>
+          <div class="bk-card">
+            <div class="bk-lbl">СПА · Сегодня</div>
+            <div class="bk-row"><span class="bk-k">Время</span><span class="bk-v">14:00 — 15:30</span></div>
+            <div class="bk-row"><span class="bk-k">Статус</span><span class="bk-ok">Подтверждено</span></div>
+          </div>
+        </div>
+        <div class="p-bottom">
+          <div class="p-bb on"><i class="ti ti-home" aria-hidden="true"></i><span>Главная</span></div>
+          <div class="p-bb"><i class="ti ti-calendar" aria-hidden="true"></i><span>Брони</span></div>
+          <div class="p-bb"><i class="ti ti-news" aria-hidden="true"></i><span>Новости</span></div>
+          <div class="p-bb"><i class="ti ti-user" aria-hidden="true"></i><span>Профиль</span></div>
+        </div>
+      </div>
+
+      <!-- СПА - выбор слота -->
+      <div id="ps-spa" class="phone-screen">
+        <div class="p-statusbar"><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
+        <button class="p-back" onclick="ps('ps-home')"><i class="ti ti-arrow-left" aria-hidden="true"></i>Назад</button>
+        <div class="p-header" style="padding-top:8px">
+          <div class="p-eyebrow">Термальный комплекс</div>
+          <div class="p-title"><em>СПА</em> & велнес</div>
+          <div class="p-sub">Выберите дату и время</div>
+        </div>
+        <div class="p-content" style="padding-top:16px">
+          <p class="p-eyebrow2">Дата</p>
+          <div class="date-strip" id="dstrip2"></div>
+          <p class="p-eyebrow2">Время сеанса</p>
+          <div class="time-grid" id="tgrid2"></div>
+          <div id="bc2" class="cont-hidden">
+            <button class="btn-g" onclick="ps('ps-form')">Продолжить</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Форма -->
+      <div id="ps-form" class="phone-screen">
+        <div class="p-statusbar"><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
+        <button class="p-back" onclick="ps('ps-spa')"><i class="ti ti-arrow-left" aria-hidden="true"></i>Назад</button>
+        <div class="p-header" style="padding-top:8px">
+          <div class="p-eyebrow">Шаг 2 из 2</div>
+          <div class="p-title">Ваши <em>данные</em></div>
+        </div>
+        <div class="p-content" style="padding-top:16px">
+          <div class="cs-card">
+            <div class="cs-row"><span class="cs-k">Сервис</span><span class="cs-v">СПА</span></div>
+            <div class="cs-row"><span class="cs-k">Дата</span><span class="cs-v" id="fd2">—</span></div>
+            <div class="cs-row"><span class="cs-k">Время</span><span class="cs-v" id="ft2">—</span></div>
+          </div>
+          <div class="f-field">
+            <label class="f-lbl">Имя</label>
+            <input class="f-inp" type="text" value="Александр" id="inp2" placeholder="Ваше имя">
+          </div>
+          <div class="f-field">
+            <label class="f-lbl">Участок</label>
+            <input class="f-inp locked" type="text" value="142" readonly>
+          </div>
+          <button class="btn-g" onclick="doBook2()">Забронировать</button>
+          <button class="btn-gh" onclick="ps('ps-spa')">Изменить время</button>
+        </div>
+      </div>
+
+      <!-- Успех -->
+      <div id="ps-ok" class="phone-screen">
+        <div class="p-statusbar"><span>9:41</span><span>&#9679;&#9679;&#9679;</span></div>
+        <div class="success-body">
+          <div class="s-ring"><i class="ti ti-check" aria-hidden="true"></i></div>
+          <div class="s-title">Бронь<br><em style="font-style:italic;color:var(--gold2)">подтверждена</em></div>
+          <div class="s-sub" id="ok2">—</div>
+          <div class="cs-card" style="width:100%;text-align:left">
+            <div class="cs-row"><span class="cs-k">Участок</span><span class="cs-v">142</span></div>
+            <div class="cs-row"><span class="cs-k">Статус</span><span class="bk-ok" style="font-size:9px;padding:2px 9px;border-radius:20px;background:#0d1f14;color:#6abf85;border:0.5px solid #1a4028;letter-spacing:0.06em">Подтверждено</span></div>
+          </div>
+          <button class="btn-g" style="margin-top:16px;width:100%" onclick="ps('ps-home')">На главную</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="accent-line" style="margin:0 auto 20px"></div>
+  <div class="footer-title">Готовы<br><em>начать?</em></div>
+  <p class="footer-sub" style="margin-top:12px;margin-bottom:32px">Обсудим детали, зафиксируем скоуп и стартуем первый этап</p>
+  <div style="display:inline-flex;flex-direction:column;align-items:center;gap:6px">
+    <div style="font-size:10px;letter-spacing:0.16em;color:var(--mist2);text-transform:uppercase">Разработка</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--cream);font-style:italic">Михаил</div>
+  </div>
+</footer>
+
+<script>
+const months=['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'];
+const days=['вс','пн','вт','ср','чт','пт','сб'];
+const slots=[
+  {t:'10:00',occ:false},{t:'11:30',occ:true},
+  {t:'13:00',occ:false},{t:'14:30',occ:false},
+  {t:'16:00',occ:true},{t:'17:30',occ:false}
+];
+let selDate='',selTime='';
+
+function ps(id){
+  document.querySelectorAll('.phone-screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function buildDemo(){
+  const strip=document.getElementById('dstrip2');
+  if(!strip)return;
+  strip.innerHTML='';
+  const now=new Date();
+  for(let i=0;i<7;i++){
+    const d=new Date(now);d.setDate(now.getDate()+i);
+    const c=document.createElement('div');
+    c.className='d-chip'+(i===0?' sel':'');
+    const dl=i===0?'сег':days[d.getDay()];
+    c.innerHTML='<span class="dn">'+dl+'</span><span class="dd">'+d.getDate()+'</span>';
+    const lbl=d.getDate()+' '+months[d.getMonth()];
+    if(i===0)selDate=lbl;
+    c.onclick=()=>{
+      document.querySelectorAll('.d-chip').forEach(x=>x.classList.remove('sel'));
+      c.classList.add('sel');selDate=lbl;selTime='';
+      document.getElementById('bc2').style.display='none';
+      buildSlots();
+    };
+    strip.appendChild(c);
+  }
+  buildSlots();
+}
+
+function buildSlots(){
+  const g=document.getElementById('tgrid2');
+  if(!g)return;
+  g.innerHTML='';
+  slots.forEach(s=>{
+    const c=document.createElement('div');
+    c.className='t-chip'+(s.occ?' occ':'');
+    c.innerHTML='<div class="t-time">'+s.t+'</div><div class="t-dur">90 минут</div><div class="t-av'+(s.occ?' occ':'')+'">'+( s.occ?'Занято':'Свободно')+'</div>';
+    if(!s.occ){
+      c.onclick=()=>{
+        document.querySelectorAll('.t-chip:not(.occ)').forEach(x=>x.classList.remove('sel'));
+        c.classList.add('sel');selTime=s.t;
+        document.getElementById('fd2').textContent=selDate;
+        document.getElementById('ft2').textContent=s.t;
+        const bc=document.getElementById('bc2');
+        bc.style.display='block';bc.classList.remove('cont-hidden');
+      };
+    }
+    g.appendChild(c);
+  });
+}
+
+function doBook2(){
+  const name=document.getElementById('inp2').value||'Гость';
+  document.getElementById('ok2').innerHTML='СПА · '+selDate+' · '+selTime+'<br>Ждём вас, '+name+'!';
+  ps('ps-ok');
+}
+
+buildDemo();
+</script>
+</body>
+</html>
